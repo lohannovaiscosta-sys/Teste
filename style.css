@@ -1,0 +1,567 @@
+/* ====================================== */
+/*     CÉU EM CAMADAS | PARALLAX REAL     */
+/* ====================================== */
+
+.stars-layer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -10;
+  background-repeat: repeat;
+  background-size: contain;
+  animation: moveStars 80s linear infinite;
+  opacity: 0.45;
+}
+
+.stars-layer.near {
+  background-image: url('https://i.imgur.com/1DnPEnk.png');
+  animation-duration: 55s;
+  opacity: 0.7;
+}
+
+.stars-layer.far {
+  background-image: url('https://i.imgur.com/OLqTusp.png');
+  animation-duration: 120s;
+  opacity: 0.25;
+}
+
+@keyframes moveStars {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-200px, -150px, 0); }
+}
+
+/* ========================================= */
+/*          TELA INICIAL DE SUSPENSE         */
+/* ========================================= */
+
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, #ff8ac8, #2b003d 55%, #050018 90%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.intro-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-card {
+  background: rgba(5, 0, 25, 0.9);
+  padding: 28px 32px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 80, 170, 0.8);
+  animation: introFloat 3s ease-in-out infinite alternate;
+}
+
+.intro-card p {
+  margin: 0 0 16px;
+  font-size: 18px;
+}
+
+#btn-revelar {
+  border: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(120deg, #ff7ac9, #ffb3e0);
+  color: #24001f;
+  box-shadow: 0 0 18px rgba(255, 80, 170, 0.9);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+#btn-revelar:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 0 22px rgba(255, 120, 200, 1);
+  filter: brightness(1.05);
+}
+
+/* animação de leve flutuando */
+@keyframes introFloat {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+/* Conteúdo principal aparece com fade + desfoque saindo */
+.conteudo {
+  opacity: 0;
+  filter: blur(12px) scale(0.98);
+  transition: opacity 0.8s ease, filter 0.8s ease;
+}
+
+.conteudo.visible {
+  opacity: 1;
+  filter: blur(0) scale(1);
+}
+
+/* ------------------------------ */
+/*  TEMA ESCURO GALÁXIA ANIMADA   */
+/* ------------------------------ */
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  background: #000;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* FUNDO GALÁXIA (DEGRADÊ ANIMADO) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 120, 185, 0.6), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(90, 140, 255, 0.5), transparent 55%),
+    radial-gradient(circle at 50% 60%, rgba(70, 0, 140, 0.7), transparent 65%),
+    #030013;
+  z-index: -3;
+  animation: galaxyMove 18s ease-in-out infinite alternate;
+}
+
+@keyframes galaxyMove {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  100% { transform: translate3d(-20px, 10px, 0) scale(1.05); }
+}
+
+/* ------------------------------ */
+/*       ESTRELAS PISCANDO        */
+/* ------------------------------ */
+
+.stars,
+.stars2,
+.stars3 {
+  position: fixed;
+  inset: -200px;
+  z-index: -2;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  opacity: 0.8;
+}
+
+/* camadas de estrelas com tamanhos diferentes */
+.stars {
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+    radial-gradient(2px 2px at 30% 80%, #fff, transparent),
+    radial-gradient(2px 2px at 70% 40%, #fff, transparent),
+    radial-gradient(2px 2px at 90% 10%, #fff, transparent),
+    radial-gradient(2px 2px at 50% 50%, #fff, transparent);
+  animation: twinkle 3s linear infinite alternate;
+}
+
+.stars2 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 60% 70%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 80% 20%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 40% 60%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 10% 90%, #fff, transparent);
+  opacity: 0.6;
+  animation: twinkle 4.5s linear infinite alternate;
+}
+
+.stars3 {
+  background-image:
+    radial-gradient(1px 1px at 15% 15%, #fff, transparent),
+    radial-gradient(1px 1px at 75% 25%, #fff, transparent),
+    radial-gradient(1px 1px at 25% 75%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 85%, #fff, transparent),
+    radial-gradient(1px 1px at 50% 20%, #fff, transparent);
+  opacity: 0.4;
+  animation: twinkle 6s linear infinite alternate;
+}
+
+@keyframes twinkle {
+  0%   { transform: translate3d(0,0,0); opacity: 0.4; }
+  50%  { opacity: 0.9; }
+  100% { transform: translate3d(-20px, 20px, 0); opacity: 0.6; }
+}
+
+/* =========================================== */
+/*        METEORO CINEMATOGRÁFICO REAL         */
+/* =========================================== */
+
+.meteor {
+  position: fixed;
+  width: 2px;
+  height: 160px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1;
+  mix-blend-mode: screen;
+
+  background: linear-gradient(
+    to top,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.25) 25%,
+    rgba(255,255,255,0.7) 70%,
+    rgba(255,255,255,1) 100%
+  );
+
+  filter:
+    blur(0.6px)
+    drop-shadow(0 0 6px rgba(255,255,255,0.9))
+    drop-shadow(0 0 12px rgba(255,255,255,0.7));
+
+  transform-origin: bottom center;
+
+  .meteor-particle {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -2;
+  filter: blur(1px);
+}
+
+}
+
+/* ------------------------------ */
+/*            CABEÇALHO           */
+/* ------------------------------ */
+
+header {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 46px;
+  color: #ff82d8;
+  text-shadow: 0 0 14px #ff3d9e;
+}
+
+header p {
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* ------------------------------ */
+/*       SEÇÃO DO TIMER           */
+/* ------------------------------ */
+
+.tempo-juntos {
+  max-width: 800px;
+  margin: 40px auto;
+  background: rgba(10, 0, 30, 0.75);
+  padding: 30px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 0 35px rgba(255, 80, 170, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.tempo-juntos h2 {
+  color: #ff9bd6;
+  text-shadow: 0 0 8px #ff3d9e;
+  margin-top: 0;
+}
+
+.tempo-juntos p {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* ========================================= */
+/*       GALERIA - FOTOS EMPILHADAS         */
+/* ========================================= */
+
+.galeria-slider {
+  max-width: 650px;
+  margin: 60px auto;
+  padding: 0 16px;
+}
+
+/* não vamos mais usar slider de verdade, 
+   só reaproveitar as classes */
+.slider-container {
+  display: block;
+}
+
+.slider {
+  display: block;
+}
+
+/* cada foto vira um “bloco” empilhado */
+.slide {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* imagem centralizada e responsiva */
+.slide img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 75vh;
+  object-fit: cover;   /* se quiser tudo aparecendo, troque para "contain" */
+  border-radius: 18px;
+  box-shadow: 0 0 30px rgba(255, 80, 140, 0.35);
+}
+
+/* legenda embaixo */
+.caption {
+  margin-top: 10px;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+/* some com setas e bolinhas */
+.nav,
+.dots {
+  display: none !important;
+}
+
+/* ------------------------------ */
+/*         MENSAGEM               */
+/* ------------------------------ */
+
+.mensagem {
+  max-width: 800px;
+  margin: 50px auto;
+  background: rgba(10, 0, 30, 0.8);
+  padding: 35px;
+  border-radius: 24px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 35px rgba(255, 80, 140, 0.4);
+}
+
+.mensagem h2 {
+  margin-top: 0;
+  color: #ff90d2;
+  text-shadow: 0 0 8px #ff3d9e;
+}
+
+/* ------------------------------ */
+/*          RODAPÉ                */
+/* ------------------------------ */
+
+footer {
+  text-align: center;
+  opacity: 0.6;
+  padding: 30px;
+  color: #f4f4f4;
+  margin-top: 60px;
+}
+
+/* ============================= */
+/*        PLAYER SPOTIFY         */
+/* ============================= */
+
+.music-player {
+  width: 100%;
+  max-width: 380px;
+  margin: 40px auto;
+  padding: 18px;
+  border-radius: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  background: rgba(10, 0, 30, 0.70);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255, 80, 170, 0.3);
+}
+
+.music-cover {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(255, 80, 170, 0.4);
+}
+
+.music-info {
+  flex: 1;
+}
+
+.music-title {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #ff9bd6;
+}
+
+.music-artist {
+  margin: 2px 0 10px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.progress-container {
+  width: 100%;
+  height: 5px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(120deg, #ff7ac9, #ffb3e0);
+  transition: width 0.1s linear;
+}
+
+.music-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ff80c8;
+  transition: transform 0.2s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.18);
+}
+
+/* PLAYER SUPER COMPACTO (igual tamanho do timer no celular) */
+@media (max-width: 480px) {
+
+  .music-player {
+    max-width: 330px;       /* largura igual ao bloco do timer */
+    padding: 12px 14px;
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    transform: scale(0.92); /* reduz ainda mais */
+    margin: 20px auto;
+  }
+
+  /* capa menor */
+  .music-cover {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+  }
+
+  /* títulos ajustados */
+  .music-title {
+    font-size: 0.90rem;
+    line-height: 1.1rem;
+  }
+
+  .music-artist {
+    font-size: 0.72rem;
+    margin-bottom: 6px;
+  }
+
+  /* barra de progresso slim */
+  .progress-container {
+    height: 3px;
+  }
+
+  /* botões menores */
+  .music-controls .music-btn {
+    font-size: 17px;
+    padding: 0;
+  }
+
+  .music-controls {
+    gap: 4px;
+  }
+}
+
+/* HEADER ESTILIZADO E RESPONSIVO */
+header {
+  text-align: center;
+  padding: 80px 20px 40px; /* mais espaçamento geral */
+  margin-top: 40px;        /* afasta do topo no PC */
+}
+
+/* título */
+header h1 {
+  margin: 0;
+  font-size: 48px;
+  color: #ff82d8;
+  text-shadow: 0 0 14px #ff3d9e;
+  letter-spacing: 1px;
+}
+
+/* subtítulo */
+header p {
+  margin-top: 12px;
+  opacity: 0.85;
+  font-size: 1.15rem;
+}
+
+
+
+/* --------- AJUSTES NO CELULAR ---------- */
+@media (max-width: 480px) {
+  header {
+    padding: 100px 20px 50px; /* empurra pra baixo */
+    margin-top: 20px;         /* espaço extra */
+  }
+
+  header h1 {
+    font-size: 34px;          /* tamanho ideal pro celular */
+    text-shadow: 0 0 10px #ff3d9e;
+  }
+
+  header p {
+    font-size: 1rem;
+    margin-top: 10px;
+    opacity: 0.9;
+  }
+}
+
+/* ===== AJUSTE DOS METEOROS NO CELULAR ===== */
+@media (max-width: 480px) {
+
+  .meteor {
+    top: -80px !important;      /* começa mais próximo do topo */
+    height: 90px !important;    /* rastro menor */
+  }
+
+  @keyframes meteorMobile {
+    0% {
+      opacity: 0;
+      transform: translate3d(-40px, 40px, 0) rotate(65deg) scaleY(0.6);
+    }
+    10% {
+      opacity: 1;
+      transform: translate3d(40px, -20px, 0) rotate(65deg) scaleY(1);
+    }
+    40% {
+      opacity: 0.9;
+      transform: translate3d(160px, -120px, 0) rotate(65deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translate3d(300px, -200px, 0) rotate(65deg);
+    }
+  }
+
+  /* aplica a animação mobile */
+  .meteor {
+    animation-name: meteorMobile !important;
+    animation-duration: 3.5s !important;
+  }
+
+}

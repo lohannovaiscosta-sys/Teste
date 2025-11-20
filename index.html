@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosso Cantinho ❤️</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <audio id="bg-music" src="musica.mp3" loop></audio>
+
+    <div class="stars-layer far"></div>
+    <div class="stars-layer near"></div>
+
+
+  <!-- TELA DE SUSPENSE -->
+  <div id="intro" class="intro-screen">
+    <div class="intro-card">
+      <p>Tenho uma coisinha pra te mostrar… 💌</p>
+      <button id="btn-revelar">Clique para ver</button>
+    </div>
+  </div>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const intro = document.getElementById("intro");
+  const btn = document.getElementById("btn-revelar");
+  const music = document.getElementById("bg-music");
+  const conteudo = document.querySelector(".conteudo");
+
+  btn.addEventListener("click", () => {
+
+    // 1️⃣ Revela o site
+    intro.classList.add("fade-out");
+
+    if (conteudo) {
+      conteudo.classList.add("visible");
+    }
+
+    // 2️⃣ Inicia a música
+    if (music) {
+      music.volume = 0.35;
+      music.play().catch(() => {
+        console.log("O navegador só permite tocar música após clique.");
+      });
+    }
+  });
+
+});
+</script>
+
+  <!-- CONTEÚDO PRINCIPAL (COMEÇA ESCONDIDO) -->
+  <div id="conteudo-principal" class="conteudo">
+    
+    <!-- CAMADAS DO CÉU ESTRELADO -->
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <div class="meteor"></div>
+
+
+    <!-- Cabeçalho do site -->
+    <header>
+      <h1>Nosso Cantinho ❤️</h1>
+      <p>Um pedacinho do nosso amor guardado aqui</p>
+    </header>
+
+    <div class="music-player">
+    <img src="capa.jpeg" class="music-cover" alt="Capa da música">
+    
+    <div class="music-info">
+        <h3 class="music-title">Anjos</h3>
+        <p class="music-artist">Venere Vai Venus</p>
+
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <button class="music-btn" id="music-btn">⏵</button>
+
+    <audio id="bg-music" src="musica.mp3"></audio>
+</div>
+
+    <!-- Tempo que estamos juntos -->
+    <section class="tempo-juntos">
+      <h2>Tempo que estamos juntos ⏱️</h2>
+      <p id="tempo-juntos-texto">
+        carregando...
+      </p>
+    </section>
+
+    <!-- Galeria de fotos - Carrossel -->
+    <section class="galeria-slider">
+      <div class="slider-container">
+        <button class="nav prev">‹</button>
+
+        <div class="slider">
+          <div class="slide active">
+            <img src="foto1.jpeg" alt="Foto 1">
+            <p class="caption">Feliz 3 Anos de Namoro Minha Vida 💫</p>
+          </div>
+
+          <div class="slide">
+            <img src="foto2.jpeg" alt="Foto 2">
+            <p class="caption">Que essa Data se repita até o fim de nossas vidas ✨</p>
+          </div>
+
+          <div class="slide">
+            <img src="foto3.jpeg" alt="Foto 3">
+            <p class="caption">Eu e a Mulher da Minha Vida💕</p>
+          </div>
+
+          <div class="slide">
+            <img src="foto4.jpeg" alt="Foto 4">
+            <p class="caption">E que venham muitos momentos abençoados e prosperos ao seu lado 🌙</p>
+          </div>
+        </div>
+
+        <button class="nav next">›</button>
+      </div>
+
+      <div class="dots">
+        <button class="dot active" data-index="0"></button>
+        <button class="dot" data-index="1"></button>
+        <button class="dot" data-index="2"></button>
+        <button class="dot" data-index="3"></button>
+      </div>
+    </section>
+
+    <!-- Mensagem -->
+    <section class="mensagem">
+      <h2>Para você, meu amor 💕</h2>
+      <p>
+        Cada momento ao seu lado é único.  
+        Esse site é só um lembrete do quanto você é especial pra mim.
+      </p>
+      <p>
+        Obrigado por tudo que temos vivido juntos.  
+        EU TE AMO! PRA SEMPRE JUNTINHOS ❤️
+      </p>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+      Feito com ❤️ por mim, especialmente para você.
+    </footer>
+  </div>
+
+  <script>
+    
+    // ===============================
+    //   TIMER "TEMPO JUNTOS"
+    // ===============================
+    const inicio = new Date('2022-11-22T00:00:00'); // TROCAR PELA DATA DE VOCÊS
+
+    function atualizarTempo() {
+      const agora = new Date();
+      const diffMs = agora - inicio;
+
+      const segundos = Math.floor(diffMs / 1000);
+      const minutos  = Math.floor(segundos / 60);
+      const horas    = Math.floor(minutos / 60);
+      const dias     = Math.floor(horas / 24);
+
+      const restoHoras   = horas % 24;
+      const restoMinutos = minutos % 60;
+      const restoSeg     = segundos % 60;
+
+      const texto = `${dias} dias, ${restoHoras} horas, ${restoMinutos} minutos e ${restoSeg} segundos`;
+
+      const elemento = document.getElementById('tempo-juntos-texto');
+      if (elemento) elemento.textContent = texto;
+    }
+
+    atualizarTempo();
+    setInterval(atualizarTempo, 1000);
+
+
+    // ===============================
+    //   TELA DE SUSPENSE / REVELAR
+    // ===============================
+    const intro     = document.getElementById('intro');
+    const btnReveal = document.getElementById('btn-revelar');
+    const conteudo  = document.getElementById('conteudo-principal');
+
+    if (conteudo) {
+      // começa escondido
+      conteudo.classList.remove('visible');
+    }
+
+    if (btnReveal && intro && conteudo) {
+      btnReveal.addEventListener('click', () => {
+        intro.classList.add('fade-out');
+        conteudo.classList.add('visible');
+
+        setTimeout(() => {
+          intro.style.display = 'none';
+        }, 900); // tempo igual ao da animação
+      });
+    } else {
+      // se algo der errado, mostra o conteúdo direto
+      if (conteudo) conteudo.classList.add('visible');
+    }
+
+    function random(min, max) {
+  return min + Math.random() * (max - min);
+}
+
+function spawnMeteor() {
+  const meteor = document.querySelector(".meteor");
+
+  // posição inicial aleatória
+  const startX = random(0, 100);
+  meteor.style.left = `${startX}vw`;
+  meteor.style.top = `110vh`;
+
+  // rastro aleatório
+  meteor.style.height = `${random(140, 260)}px`;
+
+  // brilho aleatório
+  meteor.style.opacity = random(0.55, 1);
+
+  // velocidade
+  const duration = random(0.9, 1.8);
+
+  // ângulo (leve variação)
+  const angle = 33 + Math.random() * 6;
+  const rad = angle * (Math.PI / 180);
+
+  const travelX = 700;
+  const travelY = -1150;
+
+  // reset
+  meteor.style.transition = "none";
+  meteor.style.transform = `translate3d(0, 0, 0) rotate(${angle}deg)`;
+  void meteor.offsetWidth; // reflow
+
+  meteor.style.transition = `transform ${duration}s linear, opacity ${duration}s linear`;
+
+  meteor.style.transform = `translate3d(${travelX}px, ${travelY}px, 0) rotate(${angle}deg)`;
+  meteor.style.opacity = 0;
+
+  // lançar partículas
+  spawnParticles(startX);
+
+  // spawn próximo
+  setTimeout(spawnMeteor, duration * 1000 + random(300, 1400));
+}
+
+// partículas cinematográficas
+function spawnParticles(startX) {
+  const count = Math.floor(random(4, 9));
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("div");
+    p.classList.add("meteor-particle");
+    document.body.appendChild(p);
+
+    p.style.left = `${startX + random(-1, 1)}vw`;
+    p.style.top = `calc(110vh - ${random(0, 20)}px)`;
+    p.style.opacity = random(0.6, 1);
+
+    const duration = random(0.6, 1.6);
+
+    p.style.transition = `transform ${duration}s linear, opacity ${duration}s linear`;
+    void p.offsetWidth;
+
+    p.style.transform = `translate(${random(-120, 120)}px, ${random(-300, -600)}px) scale(${random(0.3, 1.2)})`;
+    p.style.opacity = 0;
+
+    setTimeout(() => {
+      p.remove();
+    }, duration * 1000);
+  }
+}
+
+// start
+setTimeout(spawnMeteor, 500);
+
+const audio = document.getElementById("bg-music");
+const playBtn = document.getElementById("music-btn");
+const progressBar = document.querySelector(".progress-bar");
+
+let isPlaying = false;
+
+// PLAY / PAUSE
+playBtn.addEventListener("click", () => {
+    if (!isPlaying) {
+        audio.play();
+        playBtn.textContent = "⏸";
+        isPlaying = true;
+    } else {
+        audio.pause();
+        playBtn.textContent = "⏵";
+        isPlaying = false;
+    }
+});
+
+// Atualiza barra de progresso
+audio.addEventListener("timeupdate", () => {
+    const progress = (audio.currentTime / audio.duration) * 100;
+    progressBar.style.width = progress + "%";
+});
+
+  </script>
+</body>
+</html>
+
+
